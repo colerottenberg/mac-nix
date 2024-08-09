@@ -15,8 +15,11 @@
         environment.systemPackages =
           [
             pkgs.vim
+            pkgs.avrdude
           ];
 
+        # Enabling Sudo with Touch ID
+        security.pam.enableSudoTouchIdAuth = true;
         # Auto upgrade nix package and the daemon service.
         services.nix-daemon.enable = true;
         # nix.package = pkgs.nix;
@@ -42,11 +45,11 @@
     {
       # Build darwin flake using:
       # $ darwin-rebuild build --flake .#simple
-      darwinConfigurations."simple" = nix-darwin.lib.darwinSystem {
+      darwinConfigurations.Coles-MacBook-Pro-3 = nix-darwin.lib.darwinSystem {
         modules = [ configuration ];
       };
 
       # Expose the package set, including overlays, for convenience.
-      darwinPackages = self.darwinConfigurations."simple".pkgs;
+      darwinPackages = self.darwinConfigurations.Coles-MacBook-Pro-3.pkgs;
     };
 }
