@@ -17,7 +17,6 @@
             pkgs.vim
             pkgs.neovim
             pkgs.git
-            pkgs.lazygit
             # pkgs.zsh # default shell on catalina
             pkgs.cmake
             pkgs.home-manager
