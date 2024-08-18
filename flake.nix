@@ -20,6 +20,8 @@
             # pkgs.zsh # default shell on catalina
             pkgs.cmake
             pkgs.home-manager
+            pkgs.yabai
+            pkgs.skhd
           ];
 
         # Enabling Sudo with Touch ID
