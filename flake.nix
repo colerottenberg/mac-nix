@@ -88,7 +88,7 @@
             users.colerottenberg.imports = [
               ({ pkgs, ... }: {
                 # Use home state version of latest home-manager release
-                home.stateVersion = "24.11";
+                home.stateVersion = "24.11"; # Update this to the latest version of home-manager
 
                 # Home packages
                 home.packages = with pkgs; [
@@ -114,10 +114,18 @@
                   zoxide
                   eza
                   # Languages
+                  # Python
                   python3
+                  python3Packages.pip
+                  pipx
+                  poetry
+                  # Rust
                   rustup # Rust: need to run `rustup-init` after install
+                  # C/C++
                   clang
+                  # Just: a command runner
                   just # Just: a command runner
+                  # Node
                   # Fonts
                   (nerdfonts.override {
                     fonts = [
