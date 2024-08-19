@@ -17,6 +17,7 @@
 
   outputs = inputs@{ self, nix-darwin, home-manager, nixpkgs }:
     let
+      pkgs = import nixpkgs { inherit inputs; };
       configuration = { pkgs, ... }: {
         # List packages installed in system profile. To search by name, run:
         # $ nix-env -qaP | grep wget
@@ -82,6 +83,29 @@
         # The platform the configuration will be used on.
         nixpkgs.hostPlatform = "aarch64-darwin";
       };
+
+      homeConfig = { pkgs, ... }: {
+        programs.enable.home-manager = true;
+        useGlobalPkgs = true;
+        useUserPackages = true;
+
+        # Adding users
+        users.colerottenberg.imports = [
+          ({ pkgs, ... }: {
+            home = "/Users/colerottenberg";
+            description = "Coles user account";
+            packages = with pkgs; [
+              pkgs.ripgrep
+              pkgs.fd
+              pkgs.curl
+              pkgs.git
+              pkgs.fzf
+              pkgs.neovim
+            ];
+          })
+        ];
+      };
+
     in
     {
       # Build darwin flake using:
@@ -92,5 +116,10 @@
 
       # Expose the package set, including overlays, for convenience.
       darwinPackages = self.darwinConfigurations.Coles-MacBook-Pro-3.pkgs;
+
+      # Build home-manager flake using:
+      homeConfig.colerottenberg = home-manager.lib.homeManagerConfiguration {
+        configuration = homeConfig;
+      };
     };
 }
