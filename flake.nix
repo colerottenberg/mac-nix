@@ -74,6 +74,7 @@
           # Setting users and user home
           users.users.colerottenberg = {
             name = "colerottenberg";
+            description = "Cole Rottenberg";
             home = "/Users/colerottenberg";
           };
 
@@ -97,7 +98,6 @@
                   fish
                   # Tools
                   coreutils
-                  clang
                   wget
                   curl
                   vim
@@ -107,6 +107,17 @@
                   fzf
                   cmake
                   avrdude
+                  # Cool TUIs I like to use
+                  lazygit
+                  lazydocker
+                  aerc
+                  zoxide
+                  eza
+                  # Languages
+                  python3
+                  rustup # Rust: need to run `rustup-init` after install
+                  clang
+                  just # Just: a command runner
                   # Fonts
                   (nerdfonts.override {
                     fonts = [
