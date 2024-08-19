@@ -32,9 +32,8 @@
             pkgs.git
             pkgs.ripgrep
             pkgs.fzf
-            # pkgs.zsh # default shell on catalina
+            pkgs.zsh # default shell on catalina
             pkgs.cmake
-            pkgs.home-manager
           ];
 
         # Enabling Sudo with Touch ID
@@ -92,15 +91,15 @@
         # Adding users
         users.colerottenberg.imports = [
           ({ pkgs, ... }: {
-            home = "/Users/colerottenberg";
             description = "Coles user account";
-            packages = with pkgs; [
+            home.packages = with pkgs; [
               pkgs.ripgrep
               pkgs.fd
               pkgs.curl
               pkgs.git
               pkgs.fzf
               pkgs.neovim
+              pkgs.hello
             ];
           })
         ];
