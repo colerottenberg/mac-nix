@@ -45,6 +45,7 @@
           # nix.package = pkgs.nix;
 
           # Remapping the caps lock key to control
+          system.keyboard.enableKeyMapping = true;
           system.keyboard.remapCapsLockToControl = true;
 
           # Auto hide the dock
@@ -105,6 +106,7 @@
                   ripgrep
                   fzf
                   cmake
+                  avrdude
                   # Fonts
                   (nerdfonts.override {
                     fonts = [
