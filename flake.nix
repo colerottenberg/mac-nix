@@ -7,118 +7,128 @@
 
     # Nix-darwin is a tool for managing darwin configuration using nix.
     # Nix-darwin works on a systems level, while home-manager works on a user level.
-    nix-darwin.url = "github:LnL7/nix-darwin";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    darwin.url = "github:LnL7/nix-darwin";
+    darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     # Home manager is a tool for managing user configuration using nix.
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nix-darwin, home-manager, nixpkgs }:
-    let
-      pkgs = import nixpkgs { inherit inputs; };
-      configuration = { pkgs, ... }: {
-        # List packages installed in system profile. To search by name, run:
-        # $ nix-env -qaP | grep wget
-        environment.systemPackages =
-          [
-            pkgs.coreutils
-            pkgs.clang
-            pkgs.wget
-            pkgs.curl
-            pkgs.vim
-            pkgs.neovim
-            pkgs.git
-            pkgs.ripgrep
-            pkgs.fzf
-            pkgs.zsh # default shell on catalina
-            pkgs.cmake
+  outputs = inputs: {
+    darwinConfigurations.Coles-MacBook-Pro-3 = inputs.darwin.lib.darwinSystem {
+      system = "aarch64-darwin";
+      pkgs = inputs.nixpkgs.legacyPackages.aarch64-darwin;
+      modules = [
+        ({ pkgs, ... }: {
+          programs.zsh.enable = true;
+          environment.shells = [ pkgs.zsh pkgs.bash pkgs.fish ];
+          environment.loginShell = pkgs.zsh;
+          environment.systemPackages =
+            [
+              pkgs.coreutils
+              pkgs.clang
+              pkgs.wget
+              pkgs.curl
+              pkgs.vim
+              pkgs.neovim
+              pkgs.git
+              pkgs.ripgrep
+              pkgs.fzf
+              pkgs.zsh # default shell on catalina
+              pkgs.cmake
+            ];
+          # Enabling Sudo with Touch ID
+          security.pam.enableSudoTouchIdAuth = true;
+          # Auto upgrade nix package and the daemon service.
+          services.nix-daemon.enable = true;
+          # nix.package = pkgs.nix;
+
+          # Remapping the caps lock key to control
+          system.keyboard.remapCapsLockToControl = true;
+
+          # Auto hide the dock
+          system.defaults.dock.autohide = true;
+
+          # Installing Nerd Fonts for terminal but only specific fonts
+          fonts.packages = with pkgs; [
+            (pkgs.nerdfonts.override {
+              fonts = [
+                "FiraCode"
+                "Iosevka"
+                "IosevkaTerm"
+                "Meslo"
+                "JetBrainsMono"
+              ];
+            })
           ];
 
-        # Enabling Sudo with Touch ID
-        security.pam.enableSudoTouchIdAuth = true;
-        # Auto upgrade nix package and the daemon service.
-        services.nix-daemon.enable = true;
-        # nix.package = pkgs.nix;
+          # Necessary for using flakes on this system.
+          nix.settings.experimental-features = "nix-command flakes";
 
-        # Remapping the caps lock key to control
-        system.keyboard.remapCapsLockToControl = true;
+          # Used for backwards compatibility, please read the changelog before changing.
+          # $ darwin-rebuild changelog
+          system.stateVersion = 4;
 
-        # Auto hide the dock
-        system.defaults.dock.autohide = true;
+          # Setting users and user home
+          users.users.colerottenberg = {
+            name = "colerottenberg";
+            home = "/Users/colerottenberg";
+          };
 
-        # Installing Nerd Fonts for terminal but only specific fonts
-        fonts.packages = with pkgs; [
-          (pkgs.nerdfonts.override {
-            fonts = [
-              "FiraCode"
-              "Iosevka"
-              "IosevkaTerm"
-              "Meslo"
-              "JetBrainsMono"
+
+        })
+        inputs.home-manager.darwinModules.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.colerottenberg.imports = [
+              ({ pkgs, ... }: {
+                # Use home state version of latest home-manager release
+                home.stateVersion = "24.11";
+
+                # Home packages
+                home.packages = with pkgs; [
+                  # Terminal
+                  zsh
+                  bash
+                  fish
+                  # Tools
+                  coreutils
+                  clang
+                  wget
+                  curl
+                  vim
+                  neovim
+                  git
+                  ripgrep
+                  fzf
+                  cmake
+                  # Fonts
+                  (nerdfonts.override {
+                    fonts = [
+                      "FiraCode"
+                      "Iosevka"
+                      "IosevkaTerm"
+                      "Meslo"
+                      "JetBrainsMono"
+                    ];
+                  })
+                ];
+                home.sessionVariables = {
+                  EDITOR = "nvim";
+                  VISUAL = "nvim";
+                };
+                # Progams enables
+                programs.bat.enable = true;
+                programs.bat.config.theme = "TwoDark";
+                programs.home-manager.enable = true;
+              })
             ];
-          })
-        ];
-
-        # Necessary for using flakes on this system.
-        nix.settings.experimental-features = "nix-command flakes";
-
-        # Create /etc/zshrc that loads the nix-darwin environment.
-        programs.zsh.enable = true; # default shell on catalina
-        # programs.fish.enable = true;
-
-        # Default login shell for users.
-        environment.shells = [ pkgs.zsh pkgs.bash pkgs.fish ];
-        environment.loginShell = pkgs.zsh;
-
-        # Set Git commit hash for darwin-version.
-        system.configurationRevision = self.rev or self.dirtyRev or null;
-
-        # Used for backwards compatibility, please read the changelog before changing.
-        # $ darwin-rebuild changelog
-        system.stateVersion = 4;
-
-        # The platform the configuration will be used on.
-        nixpkgs.hostPlatform = "aarch64-darwin";
-      };
-
-      homeConfig = { pkgs, ... }: {
-        programs.enable.home-manager = true;
-        useGlobalPkgs = true;
-        useUserPackages = true;
-
-        # Adding users
-        users.colerottenberg.imports = [
-          ({ pkgs, ... }: {
-            description = "Coles user account";
-            home.packages = with pkgs; [
-              pkgs.ripgrep
-              pkgs.fd
-              pkgs.curl
-              pkgs.git
-              pkgs.fzf
-              pkgs.neovim
-              pkgs.hello
-            ];
-          })
-        ];
-      };
-
-    in
-    {
-      # Build darwin flake using:
-      # $ darwin-rebuild build --flake .#simple
-      darwinConfigurations.Coles-MacBook-Pro-3 = nix-darwin.lib.darwinSystem {
-        modules = [ configuration ];
-      };
-
-      # Expose the package set, including overlays, for convenience.
-      darwinPackages = self.darwinConfigurations.Coles-MacBook-Pro-3.pkgs;
-
-      # Build home-manager flake using:
-      homeConfig.colerottenberg = home-manager.lib.homeManagerConfiguration {
-        configuration = homeConfig;
-      };
+          };
+        }
+      ];
     };
+  };
 }
