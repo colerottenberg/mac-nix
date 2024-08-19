@@ -45,6 +45,9 @@
         # Remapping the caps lock key to control
         system.keyboard.remapCapsLockToControl = true;
 
+        # Auto hide the dock
+        system.defaults.dock.autohide = true;
+
         # Installing Nerd Fonts for terminal but only specific fonts
         fonts.packages = with pkgs; [
           (pkgs.nerdfonts.override {
