@@ -170,6 +170,11 @@
                   userName = "Cole Rottenberg";
                   userEmail = "cole.rottenberg@gmail.com";
                 };
+
+                # TexLive Management
+                programs.texlive = {
+                  enable = true;
+                };
               })
             ];
           };
