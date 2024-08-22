@@ -64,6 +64,23 @@
             })
           ];
 
+          # Managing Homebrew packages
+          homebrew =
+            {
+              enable = true;
+              # Adding Homebrew Casks
+              casks = [
+                # "google-chrome"
+                # "visual-studio-code"
+                # "wezterm"
+              ];
+              # Adding Homebrew taps
+              taps = [
+                # "homebrew/cask-fonts"
+              ];
+              # Adding Homebrew brews
+            };
+
           # Necessary for using flakes on this system.
           nix.settings.experimental-features = "nix-command flakes";
 
@@ -110,7 +127,6 @@
                   # Cool TUIs I like to use
                   lazygit
                   lazydocker
-                  aerc
                   zoxide
                   eza
                   # Languages
@@ -142,9 +158,18 @@
                   VISUAL = "nvim";
                 };
                 # Progams enables
+                # Bat: A cat clone with wings
                 programs.bat.enable = true;
                 programs.bat.config.theme = "TwoDark";
                 programs.home-manager.enable = true;
+                # Zoxide: A smarter cd command
+                programs.zoxide.enable = true;
+                # Managed Git Config
+                programs.git = {
+                  enable = true;
+                  userName = "Cole Rottenberg";
+                  userEmail = "cole.rottenberg@gmail.com";
+                };
               })
             ];
           };
