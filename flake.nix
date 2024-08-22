@@ -160,7 +160,7 @@
                 # Progams enables
                 # Bat: A cat clone with wings
                 programs.bat.enable = true;
-                programs.bat.config.theme = "TwoDark";
+                programs.bat.config.theme = "gruvbox-dark";
                 programs.home-manager.enable = true;
                 # Zoxide: A smarter cd command
                 programs.zoxide.enable = true;
@@ -173,6 +173,14 @@
 
                 # TexLive Management
                 programs.texlive = {
+                  enable = true;
+                };
+
+                # Configure Neovim
+                # programs.neovim = { };
+
+                # Configuring starship prompt
+                programs.starship = {
                   enable = true;
                 };
               })
