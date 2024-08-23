@@ -129,6 +129,7 @@
                   lazydocker
                   zoxide
                   eza
+                  direnv
                   # Languages
                   # Python
                   python3
