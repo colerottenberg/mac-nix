@@ -1,4 +1,4 @@
-({ pkgs, ... }: {
+{ pkgs, ... }: {
   programs.zsh.enable = true;
   environment.shells = [ pkgs.zsh pkgs.bash pkgs.fish ];
   environment.loginShell = pkgs.zsh;
@@ -74,4 +74,4 @@
   };
 
 
-})
+}

@@ -1,4 +1,4 @@
-({ pkgs, ... }: {
+{ pkgs, ... }: {
   # Use home state version of latest home-manager release
   home.stateVersion = "24.11"; # Update this to the latest version of home-manager
 
@@ -87,4 +87,4 @@
   # Neovim Configuration
 
   # AeroSpace WM Configuration
-})
+}
