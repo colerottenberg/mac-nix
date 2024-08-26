@@ -1,21 +1,23 @@
 { pkgs, ... }: {
   programs.zsh.enable = true;
-  environment.shells = [ pkgs.zsh pkgs.bash pkgs.fish ];
-  environment.loginShell = pkgs.zsh;
-  environment.systemPackages =
-    [
-      pkgs.coreutils
-      pkgs.clang
-      pkgs.wget
-      pkgs.curl
-      pkgs.vim
-      pkgs.neovim
-      pkgs.git
-      pkgs.ripgrep
-      pkgs.fzf
-      pkgs.zsh # default shell on catalina
-      pkgs.cmake
-    ];
+  environment = {
+    shells = [ pkgs.zsh pkgs.bash pkgs.fish ];
+    loginShell = pkgs.zsh;
+    systemPackages = with pkgs;
+      [
+        coreutils
+        clang
+        wget
+        curl
+        vim
+        neovim
+        git
+        ripgrep
+        fzf
+        zsh # default shell on catalina
+        cmake
+      ];
+  };
   # Enabling Sudo with Touch ID
   security.pam.enableSudoTouchIdAuth = true;
   # Auto upgrade nix package and the daemon service.
@@ -23,8 +25,12 @@
   # nix.package = pkgs.nix;
 
   # Remapping the caps lock key to control
-  system.keyboard.enableKeyMapping = true;
-  system.keyboard.remapCapsLockToControl = true;
+  # system.keyboard.enableKeyMapping = true;
+  # system.keyboard.remapCapsLockToControl = true;
+  system.keyboard = {
+    enableKeyMapping = true;
+    remapCapsLockToControl = true;
+  };
 
   # Auto hide the dock
   system.defaults.dock.autohide = true;

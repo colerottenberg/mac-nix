@@ -15,25 +15,29 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs: {
-    darwinConfigurations.Coles-MacBook-Pro-3 = inputs.darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
-      pkgs = inputs.nixpkgs.legacyPackages.aarch64-darwin;
-      modules = [
-        ./modules/darwin
+  outputs = inputs@{ nixpkgs, home-manager, darwin, ... }: {
+    darwinConfigurations.Coles-MacBook-Pro-3 =
+      darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        # pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+        pkgs = import nixpkgs {
+          system = "aarch64-darwin";
+        };
+        modules = [
+          ./modules/darwin
 
-        inputs.home-manager.darwinModules.home-manager
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            users.colerottenberg.imports = [
-              ./modules/home-manager
+          home-manager.darwinModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.colerottenberg.imports = [
+                ./modules/home-manager
 
-            ];
-          };
-        }
-      ];
-    };
+              ];
+            };
+          }
+        ];
+      };
   };
 }

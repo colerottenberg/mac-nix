@@ -24,13 +24,13 @@
     lazydocker
     zoxide
     eza
-    direnv
     # Languages
     # Python
     python3
     python3Packages.pip
     pipx
     poetry
+    pyenv
     # Rust
     rustup # Rust: need to run `rustup-init` after install
     # C/C++
@@ -85,6 +85,11 @@
   # home.file.".config/starship.toml".source = ./starship.toml;
 
   # Neovim Configuration
+  programs.neovim = {
+    enable = true;
+    viAlias = true;
+    vimAlias = true;
+  };
 
   # AeroSpace WM Configuration
 }
