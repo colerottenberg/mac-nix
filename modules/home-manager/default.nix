@@ -84,12 +84,5 @@
   # Starship Configuration
   # home.file.".config/starship.toml".source = ./starship.toml;
 
-  # Neovim Configuration
-  programs.neovim = {
-    enable = true;
-    viAlias = true;
-    vimAlias = true;
-  };
-
   # AeroSpace WM Configuration
 }

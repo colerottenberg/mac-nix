@@ -1,23 +1,20 @@
 { pkgs, ... }: {
   programs.zsh.enable = true;
-  environment = {
-    shells = [ pkgs.zsh pkgs.bash pkgs.fish ];
-    loginShell = pkgs.zsh;
-    systemPackages = with pkgs;
-      [
-        coreutils
-        clang
-        wget
-        curl
-        vim
-        neovim
-        git
-        ripgrep
-        fzf
-        zsh # default shell on catalina
-        cmake
-      ];
-  };
+  environment.shells = [ pkgs.zsh pkgs.bash pkgs.fish ];
+  environment.loginShell = pkgs.zsh;
+  environment.systemPackages =
+    [
+      pkgs.coreutils
+      pkgs.clang
+      pkgs.wget
+      pkgs.curl
+      pkgs.vim
+      pkgs.neovim
+      pkgs.git
+      pkgs.ripgrep
+      pkgs.fzf
+      pkgs.cmake
+    ];
   # Enabling Sudo with Touch ID
   security.pam.enableSudoTouchIdAuth = true;
   # Auto upgrade nix package and the daemon service.
