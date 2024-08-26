@@ -48,6 +48,7 @@
       enable = true;
       # Adding Homebrew Casks
       casks = [
+        "neovide"
         # "google-chrome"
         # "visual-studio-code"
         # "wezterm"
