@@ -16,7 +16,6 @@
       pkgs.ripgrep
       pkgs.fzf
       pkgs.cmake
-      pkgs.raycast
     ];
   # Enabling Sudo with Touch ID
   security.pam.enableSudoTouchIdAuth = true;
@@ -55,6 +54,7 @@
       # Adding Homebrew Casks
       casks = [
         "neovide"
+        "raycast"
         # "google-chrome"
         # "visual-studio-code"
         # "wezterm"

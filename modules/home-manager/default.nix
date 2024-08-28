@@ -19,6 +19,7 @@
     fzf
     cmake
     avrdude
+    # Productivity Tools
     # Cool TUIs I like to use
     lazygit
     lazydocker
