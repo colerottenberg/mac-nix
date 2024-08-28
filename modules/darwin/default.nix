@@ -1,4 +1,6 @@
 { pkgs, ... }: {
+  # Allow Unfree Packages
+  nixpkgs.config.allowUnfree = true;
   programs.zsh.enable = true;
   environment.shells = [ pkgs.zsh pkgs.bash pkgs.fish ];
   environment.loginShell = pkgs.zsh;
@@ -14,6 +16,7 @@
       pkgs.ripgrep
       pkgs.fzf
       pkgs.cmake
+      pkgs.raycast
     ];
   # Enabling Sudo with Touch ID
   security.pam.enableSudoTouchIdAuth = true;
