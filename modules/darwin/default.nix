@@ -55,6 +55,7 @@
       casks = [
         "neovide"
         "raycast"
+        "appflowy"
         # "google-chrome"
         # "visual-studio-code"
         # "wezterm"
