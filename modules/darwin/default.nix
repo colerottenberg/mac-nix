@@ -16,6 +16,7 @@
       pkgs.ripgrep
       pkgs.fzf
       pkgs.cmake
+      pkgs.lmdb
     ];
   # Enabling Sudo with Touch ID
   security.pam.enableSudoTouchIdAuth = true;
