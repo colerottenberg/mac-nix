@@ -31,6 +31,7 @@
     python3Packages.pip
     pipx
     poetry
+    pdm
     pyenv
     # Rust
     rustup # Rust: need to run `rustup-init` after install
