@@ -66,6 +66,8 @@
         # "homebrew/cask-fonts"
       ];
       # Adding Homebrew brews
+
+      # brews = [ ];
     };
 
   # Necessary for using flakes on this system.
