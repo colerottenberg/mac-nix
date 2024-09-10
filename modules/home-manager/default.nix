@@ -19,6 +19,7 @@
     fzf
     cmake
     avrdude
+    influxdb2-cli
     # Productivity Tools
     # Cool TUIs I like to use
     lazygit
