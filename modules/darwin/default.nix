@@ -67,7 +67,9 @@
       ];
       # Adding Homebrew brews
 
-      # brews = [ ];
+      brews = [
+        "sqlite"
+      ];
     };
 
   # Necessary for using flakes on this system.
