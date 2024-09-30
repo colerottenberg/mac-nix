@@ -55,6 +55,7 @@
       # Adding Homebrew Casks
       casks = [
         "neovide"
+        "skim"
         "raycast"
         "appflowy"
         # "google-chrome"
