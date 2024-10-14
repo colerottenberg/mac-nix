@@ -40,7 +40,8 @@
     clang
     # Just: a command runner
     just # Just: a command runner
-    # Node
+    # WebDev
+    bun
     # Fonts
     (nerdfonts.override {
       fonts = [
