@@ -17,6 +17,7 @@
     git
     ripgrep
     fzf
+    onefetch
     cmake
     avrdude
     influxdb2-cli
