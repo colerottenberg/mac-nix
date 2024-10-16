@@ -72,11 +72,6 @@
     userEmail = "cole.rottenberg@gmail.com";
   };
 
-  # TexLive Management
-  programs.texlive = {
-    enable = true;
-  };
-
   # Configure Neovim
   # programs.neovim = { };
 
