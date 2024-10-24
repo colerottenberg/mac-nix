@@ -6,8 +6,6 @@
   environment.loginShell = pkgs.zsh;
   environment.systemPackages =
     [
-      pkgs.coreutils
-      pkgs.clang
       pkgs.wget
       pkgs.curl
       pkgs.vim
@@ -15,7 +13,6 @@
       pkgs.git
       pkgs.ripgrep
       pkgs.fzf
-      pkgs.cmake
     ];
   # Enabling Sudo with Touch ID
   security.pam.enableSudoTouchIdAuth = true;
