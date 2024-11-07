@@ -20,7 +20,6 @@
     onefetch
     cmake
     avrdude
-    influxdb2-cli
     # Productivity Tools
     # Cool TUIs I like to use
     lazygit
@@ -36,13 +35,7 @@
     pdm
     pyenv
     # Rust
-    rustup # Rust: need to run `rustup-init` after install
-    # C/C++
-    clang
-    # Just: a command runner
     just # Just: a command runner
-    # WebDev
-    bun
     # Fonts
     (nerdfonts.override {
       fonts = [
