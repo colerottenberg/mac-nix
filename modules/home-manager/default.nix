@@ -54,7 +54,7 @@
   # Progams enables
   # Bat: A cat clone with wings
   programs.bat.enable = true;
-  programs.bat.config.theme = "gruvbox-dark";
+  programs.bat.config.theme = "catppuccin-latte";
   programs.home-manager.enable = true;
   # Zoxide: A smarter cd command
   programs.zoxide.enable = true;
