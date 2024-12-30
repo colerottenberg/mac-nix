@@ -26,7 +26,9 @@
     lazydocker
     zoxide
     eza
+    serie
     # Languages
+    # Haskell
     # Python
     python3
     python3Packages.pip
